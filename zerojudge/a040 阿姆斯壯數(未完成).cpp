@@ -1,48 +1,54 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-int how_many(int);
+int count(int);
 int main()
 {
 	int n,m;
-	while(cin >>n >> m)
+	
+	while(cin >>n >>m)	
 	{
-		int i;
-		for(i=n;i<=m;i++)
-		{
-			int number_of_dight;	
-			number_of_dight = how_many(i);
-			int arr;
-			int sum = i;
-			int sum2 = 0;	
-			arr = pow(i%10,number_of_dight);
-			for(int j=2;j<=number_of_dight;j++)
-			{	 	
-				int try_demo = i;
-				int set;
-				int j2 = j;
-				int first = pow(10,j2);
-				int second = pow(10,j2-1); 
-				set =pow(try_demo%first-try_demo%second,number_of_dight);
-				try_demo/=10;
-				sum2 = sum2+set;
-			}
-			sum2 = sum2+arr;
-			if(sum == sum2)
+	    int t=0;
+		for(int i=n;i<=m;i++)			
+		{	
+			int arr[count(i)];
+			int count_2 = 0;
+			int i2 = i;
+			int sum = 0;
+			
+			while(i2!=0)
 			{
-				cout << sum << " ";
+				arr[count_2] = i2%10;
+				i2/=10;
+				count_2++;
 			}
-		}	
+			
+			for(int z=0;z<count(i);z++)
+			{
+				sum = sum +pow(arr[z],count(i));
+			}
+			
+			if(sum == i)
+			{
+				cout << i << " ";
+				t++;
+			}
+		}
+		if(t==0)
+			cout << "none" << endl;
+		cout << endl;	
 	}
+
 	return 0;
 }
-int how_many(int i)
+int count(int x)
 {
-	int j = 0;
-	while(i !=0)
+	int count=0;
+	int try_x = x;
+	while(try_x !=0)
 	{
-		i/=10;
-		j  ++;	
+		try_x/=10;
+		count++;
 	}
-	return j;
+	return count;
 }
